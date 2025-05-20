@@ -1,7 +1,7 @@
-package br.com.movieflix.controller;
+package br.com.movieverse.controller;
 
-import br.com.movieflix.entity.Category;
-import br.com.movieflix.service.CategoryService;
+import br.com.movieverse.entity.Category;
+import br.com.movieverse.service.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

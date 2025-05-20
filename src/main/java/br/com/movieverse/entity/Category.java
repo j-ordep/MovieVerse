@@ -1,4 +1,4 @@
-package br.com.movieflix.entity;
+package br.com.movieverse.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

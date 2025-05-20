@@ -1,4 +1,4 @@
-package br.com.movieflix;
+package br.com.movieverse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

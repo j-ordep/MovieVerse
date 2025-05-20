@@ -1,9 +1,8 @@
-package br.com.movieflix.service;
+package br.com.movieverse.service;
 
-import br.com.movieflix.entity.Category;
-import br.com.movieflix.repository.CategoryRepository;
+import br.com.movieverse.entity.Category;
+import br.com.movieverse.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
