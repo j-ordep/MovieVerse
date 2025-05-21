@@ -5,6 +5,7 @@ import br.com.movieverse.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -15,16 +16,22 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
     public List<Category> getAllCategories() {
        List<Category> categories = categoryRepository.findAll();
        return categories;
     }
 
-    // flyway configurado
-    // spring security no POM.XML comentado para não atrapalhar o desenvolvimento por enquanto
-
-    // TODO fazer melhorias, se existe já no banco a category etc
-    public Category saveCategory(Category category) {
-        return categoryRepository.save(category);
+    public Optional<Category> getCategoryById(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        return category;
     }
+
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
+
 }
