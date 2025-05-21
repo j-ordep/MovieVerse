@@ -2,14 +2,13 @@ package br.com.movieverse.controller;
 
 import br.com.movieverse.entity.Category;
 import br.com.movieverse.service.CategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@RestController("/movieflix/category")
+@RestController()
+@RequestMapping("/movieflix/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -18,17 +17,24 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping()
-    public List<Category> getAllCategories() {
-        return categoryService.getAllCategories();
-    }
-
     @PostMapping()
     public Category saveCategory(@RequestBody Category category) {
         return categoryService.saveCategory(category);
     }
 
-    // flyway configurado
-    // spring security no POM.XML comentado para não atrapalhar o desenvolvimento por enquanto
+    @GetMapping()
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
+    }
+
+    @GetMapping("{id}")
+    public Optional<Category> getCategory(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+    }
 
 }
