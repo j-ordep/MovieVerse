@@ -26,11 +26,10 @@ public class CategoryService {
     }
 
     public Optional<Category> getCategoryById(Long id) {
-        Optional<Category> category = categoryRepository.findById(id);
-        return category;
+        return categoryRepository.findById(id);
     }
 
-    public void deleteCategory(Long id) {
+    public void deleteCategoryById(Long id) {
         categoryRepository.deleteById(id);
     }
 
