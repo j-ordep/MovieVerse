@@ -15,12 +15,11 @@ public class StreamingMapper {
                 .build();
     }
 
-    public StreamingResponse toStreamingResponse(Streaming streaming) {
+    public StreamingResponse toResponse(Streaming streaming) {
         return StreamingResponse
                 .builder()
                 .id(streaming.getId())
                 .name(streaming.getName())
                 .build();
     }
-
 }

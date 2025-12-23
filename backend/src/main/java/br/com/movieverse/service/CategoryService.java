@@ -16,20 +16,20 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category saveCategory(Category category) {
+    public Category save(Category category) {
         return categoryRepository.save(category);
     }
 
-    public List<Category> getAllCategories() {
-       List<Category> categories = categoryRepository.findAll();
-       return categories;
+    public List<Category> getAll() {
+        List<Category> categories = categoryRepository.findAll();
+        return categories;
     }
 
-    public Optional<Category> getCategoryById(Long id) {
+    public Optional<Category> getById(Long id) {
         return categoryRepository.findById(id);
     }
 
-    public void deleteCategoryById(Long id) {
+    public void deleteById(Long id) {
         categoryRepository.deleteById(id);
     }
 

@@ -25,13 +25,13 @@ public class CategoryController {
     @PostMapping()
     public ResponseEntity<CategoryResponse> saveCategory(@RequestBody CategoryRequest categoryRequest) {
         Category newCategory = CategoryMapper.toCategory(categoryRequest);
-        Category savedCategory = categoryService.saveCategory(newCategory);
+        Category savedCategory = categoryService.save(newCategory);
         return ResponseEntity.status(HttpStatus.CREATED).body(CategoryMapper.toCategoryResponse(savedCategory));
     }
 
     @GetMapping
     public ResponseEntity<List<CategoryResponse>> getAllCategories() {
-        List<CategoryResponse> listCategory= categoryService.getAllCategories()
+        List<CategoryResponse> listCategory = categoryService.getAll()
                 .stream()
                 .map(categories -> CategoryMapper.toCategoryResponse(categories))
                 .toList();
@@ -41,14 +41,14 @@ public class CategoryController {
 
     @GetMapping("{id}")
     public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable Long id) {
-        return categoryService.getCategoryById(id)
+        return categoryService.getById(id)
                 .map(category -> ResponseEntity.ok(CategoryMapper.toCategoryResponse(category)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
-        categoryService.deleteCategoryById(id);
+        categoryService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
