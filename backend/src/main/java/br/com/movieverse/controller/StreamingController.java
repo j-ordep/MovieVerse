@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/movieflix/streaming")
@@ -22,19 +23,33 @@ public class StreamingController {
     }
 
     @PostMapping
-    public ResponseEntity<StreamingResponse> save(@RequestBody StreamingRequest request) {
-        Streaming streaming = StreamingMapper.toStreaming(request);
-        streamingService.save(streaming);
-        return ResponseEntity.status(HttpStatus.CREATED).body(StreamingMapper.toResponse(streaming));
+    public ResponseEntity<StreamingResponse> saveStreaming(@RequestBody StreamingRequest request) {
+        Streaming newStreaming = StreamingMapper.toStreaming(request);
+        Streaming savedStreaming = streamingService.save(newStreaming);
+        StreamingResponse response = StreamingMapper.toResponse(savedStreaming);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
-    public List<StreamingResponse> getAll(){
+    public ResponseEntity<List<StreamingResponse>> getAllStreamings(){
         List<StreamingResponse> listStreaming = streamingService.getAll()
                 .stream()
                 .map(streaming -> StreamingMapper.toResponse(streaming))
                 .toList();
-        return listStreaming;
+
+        return ResponseEntity.ok(listStreaming);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<StreamingResponse> getStreamingById(@PathVariable Long id) {
+        return streamingService.getById(id)
+                .map(streaming -> ResponseEntity.ok(StreamingMapper.toResponse(streaming)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteStreaming(@PathVariable Long id) {
+        streamingService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
