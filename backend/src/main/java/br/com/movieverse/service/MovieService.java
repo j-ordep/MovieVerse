@@ -5,6 +5,7 @@ import br.com.movieverse.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -15,9 +16,17 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public List<Movie> getAll() {
+    public Movie save(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
+    public List<Movie> findAll() {
         List<Movie> movies = movieRepository.findAll();
         return movies;
     }
 
+    public Optional<Movie> getById(Long id) {
+        Optional<Movie> movie = movieRepository.findById(id);
+        return movie;
+    }
 }
